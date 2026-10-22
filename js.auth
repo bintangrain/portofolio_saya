@@ -1,0 +1,50 @@
+/* ===== PENGAMAN HALAMAN (simulasi di browser) =====
+   Semua halaman kecuali masuk.html hanya bisa dibuka setelah login di masuk.html.
+   Status login disimpan di sessionStorage (hilang saat tab/browser ditutup).
+   Untuk mematikan pengaman (misalnya saat mengembangkan), ubah WAJIB_LOGIN menjadi false. */
+const WAJIB_LOGIN = true;
+const KUNCI_MASUK = 'masukSebagai';
+
+function penggunaAktif() {
+  try { return sessionStorage.getItem(KUNCI_MASUK); } catch (e) { return null; }
+}
+function simpanMasuk(email) {
+  try { sessionStorage.setItem(KUNCI_MASUK, email); } catch (e) { /* abaikan */ }
+}
+function hapusMasuk() {
+  try { sessionStorage.removeItem(KUNCI_MASUK); } catch (e) { /* abaikan */ }
+}
+
+// Mengetahui halaman yang sedang dibuka (index.html, proyek.html, masuk.html, dst.)
+const namaHalaman = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
+const halamanLogin = namaHalaman === 'masuk';
+
+// Belum login dan bukan di halaman masuk: alihkan ke halaman masuk
+if (WAJIB_LOGIN && !halamanLogin && !penggunaAktif()) {
+  document.documentElement.style.display = 'none'; // sembunyikan isi agar tidak sempat terlihat
+  location.replace('masuk.html');
+}
+
+// Menyesuaikan navbar setelah halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', function () {
+  const email = penggunaAktif();
+  const tombol = document.getElementById('tombolNav');
+
+  if (halamanLogin) {
+    // Di halaman masuk dan belum login: menu tidak ditampilkan karena semua halaman terkunci
+    if (WAJIB_LOGIN && !email) {
+      const menu = document.getElementById('menuUtama');
+      const pemicu = document.querySelector('.navbar-toggler');
+      if (menu) menu.style.setProperty('display', 'none', 'important'); // !important agar menang atas aturan navbar Bootstrap
+      if (pemicu) pemicu.style.setProperty('display', 'none', 'important');
+    }
+    return;
+  }
+
+  // Di halaman lain dan sudah login: tombol "Masuk" berubah menjadi "Keluar"
+  if (tombol && email) {
+    tombol.textContent = 'Keluar';
+    tombol.title = 'Masuk sebagai ' + email;
+    tombol.addEventListener('click', hapusMasuk); // hapus status lalu menuju masuk.html
+  }
+});

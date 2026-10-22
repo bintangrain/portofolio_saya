@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beranda | Bintang Rain</title>
+
+  <!-- BOOTSTRAP 5.3.3 (CSS + ikon) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- CSS buatan sendiri (harus setelah Bootstrap) -->
+  <link href="css/style.css" rel="stylesheet">
+  <!-- Pengaman halaman: harus dimuat di <head> agar berjalan sebelum isi tampil -->
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Bintang Rain<span class="titik">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama" aria-controls="menuUtama" aria-expanded="false" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuUtama">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="proyek.html">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-kobalt btn-sm px-3" id="tombolNav" href="masuk.html">Masuk</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <p class="fw-semibold text-secondary mb-2">Mahasiswa Pendidikan Teknologi Informasi</p>
+          <h1>Saya merancang teknologi yang membantu orang belajar.</h1>
+          <p class="lead mt-3">Halo, saya Bintang Rain Heriawan. Di sini saya mengumpulkan proyek web, desain antarmuka, dan media pembelajaran yang pernah saya kerjakan.</p>
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <a href="proyek.html" class="btn btn-kobalt btn-lg">Lihat proyek</a>
+            <a href="tentang.html" class="btn btn-garis btn-lg">Tentang saya</a>
+            <button type="button" class="btn btn-link btn-lg text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalKontak">Hubungi saya</button>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="jendela-kode">
+            <div class="bar"><span></span><span></span><span></span><small>profil.js</small></div>
+<pre><code><span class="k">const</span> bintang = {
+  nama:    <span class="s">"Bintang Rain Heriawan"</span>,
+  kampus:  <span class="s">"Universitas Sulawesi Barat"</span>,
+  prodi:   <span class="s">"Pendidikan Teknologi Informasi"</span>,
+  fokus:   [<span class="s">"Web"</span>, <span class="s">"UI/UX"</span>, <span class="s">"Media ajar"</span>],
+  sedangBelajar: <span class="s">"Bootstrap 5"</span>,
+  terbukaUntukKolaborasi: <span class="k">true</span>
+};</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="bagian pt-0" aria-label="Ringkasan angka">
+    <div class="container">
+      <div class="row g-3" id="statistik"></div>
+    </div>
+  </section>
+
+  <section class="bagian pt-2" aria-labelledby="judulKeahlian">
+    <div class="container">
+      <h2 class="judul-bagian mb-3" id="judulKeahlian">Keahlian</h2>
+      <p class="text-secondary">Klik salah satu keahlian untuk melihat proyek yang berkaitan.</p>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="keahlian" href="proyek.html?kategori=Web"><i class="bi bi-code-slash"></i> Pengembangan web</a>
+        <a class="keahlian" href="proyek.html?kategori=UI%2FUX"><i class="bi bi-vector-pen"></i> Desain UI/UX</a>
+        <a class="keahlian" href="proyek.html?kategori=Pendidikan"><i class="bi bi-mortarboard"></i> Media pembelajaran</a>
+        <a class="keahlian" href="tentang.html"><i class="bi bi-bar-chart"></i> Tingkat penguasaan</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bagian bagian-gelap" aria-labelledby="judulUnggulan">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-4">
+        <h2 class="judul-bagian mb-0 text-white" id="judulUnggulan">Proyek unggulan</h2>
+        <a href="proyek.html" class="link-light fw-semibold">Semua proyek</a>
+      </div>
+      <div class="row g-4" id="daftarUnggulan"></div>
+    </div>
+  </section>
+
+  <section class="bagian" aria-labelledby="judulCara">
+    <div class="container">
+      <h2 class="judul-bagian mb-4" id="judulCara">Cara saya bekerja</h2>
+      <div class="row g-4">
+        <div class="col-md-4"><div class="kotak">
+          <i class="bi bi-search fs-2 text-primary"></i>
+          <h3 class="h5 mt-2">Memahami kebutuhan</h3>
+          <p class="mb-0">Saya mulai dengan bertanya siapa penggunanya dan masalah apa yang ingin diselesaikan, sebelum menyentuh desain.</p>
+        </div></div>
+        <div class="col-md-4"><div class="kotak">
+          <i class="bi bi-vector-pen fs-2 text-primary"></i>
+          <h3 class="h5 mt-2">Merancang bertahap</h3>
+          <p class="mb-0">Sketsa dan prototipe dibuat lebih dulu agar perubahan murah dilakukan, lalu dikembangkan menjadi halaman yang berfungsi.</p>
+        </div></div>
+        <div class="col-md-4"><div class="kotak">
+          <i class="bi bi-check2-circle fs-2 text-primary"></i>
+          <h3 class="h5 mt-2">Menguji dan memperbaiki</h3>
+          <p class="mb-0">Hasil dicoba di berbagai ukuran layar dan oleh orang lain, kemudian diperbaiki berdasarkan masukan.</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bagian pt-0">
+    <div class="container text-center">
+      <h2 class="judul-bagian">Punya ide untuk dikerjakan bersama?</h2>
+      <p class="mx-auto text-secondary">Saya terbuka untuk kerja sama proyek web, desain antarmuka, dan pengembangan media belajar.</p>
+      <button type="button" class="btn btn-kobalt btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#modalKontak">Kirim pesan</button>
+    </div>
+  </section>
+
+  <!-- Modal kontak (komponen Bootstrap) -->
+  <div class="modal fade" id="modalKontak" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h4" id="judulModal">Hubungi saya</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <p>Pilih saluran yang paling nyaman bagi Anda.</p>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="mailto:emailkamu@gmail.com"><i class="bi bi-envelope me-2"></i> Email</a>
+            <a class="list-group-item list-group-item-action" href="https://wa.me/6281234567890" target="_blank" rel="noopener"><i class="bi bi-whatsapp me-2"></i> WhatsApp</a>
+            <a class="list-group-item list-group-item-action" href="https://github.com/" target="_blank" rel="noopener"><i class="bi bi-github me-2"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container d-md-flex justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <strong class="text-white">Bintang Rain Heriawan</strong><br>
+        Pendidikan Teknologi Informasi, Universitas Sulawesi Barat<br>
+        <a href="index.html">Beranda</a> &nbsp;·&nbsp; <a href="proyek.html">Proyek</a> &nbsp;·&nbsp; <a href="tentang.html">Tentang</a> &nbsp;·&nbsp; <a href="masuk.html">Masuk</a>
+      </div>
+      <div>
+        <a class="ikon-sosial" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a class="ikon-sosial" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a class="ikon-sosial" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a class="ikon-sosial" href="mailto:bintangrain36@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+    <div class="container mt-3 small">&copy; <span id="tahun"></span> Bintang Rain Heriawan. Dibuat sebagai tugas UTS.</div>
+  </footer>
+
+  <!-- BOOTSTRAP 5.3.3 (JavaScript) : wajib di atas skrip sendiri -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proyek | Bintang Rain</title>
+
+  <!-- BOOTSTRAP 5.3.3 (CSS + ikon) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- CSS buatan sendiri (harus setelah Bootstrap) -->
+  <link href="css/style.css" rel="stylesheet">
+  <!-- Pengaman halaman: harus dimuat di <head> agar berjalan sebelum isi tampil -->
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Bintang Rain<span class="titik">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama" aria-controls="menuUtama" aria-expanded="false" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuUtama">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link active" href="proyek.html" aria-current="page">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-kobalt btn-sm px-3" id="tombolNav" href="masuk.html">Masuk</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="bagian">
+    <div class="container">
+      <h1 class="judul-bagian">Semua proyek</h1>
+      <p class="text-secondary">Pilih kategori atau ketik kata kunci, lalu klik kartu untuk membaca detail proyek.</p>
+      <div class="row g-3 align-items-center my-3">
+        <div class="col-lg-8">
+          <div class="d-flex flex-wrap gap-2" role="group" aria-label="Filter kategori">
+            <button type="button" class="btn btn-filter aktif" data-filter="semua">Semua</button>
+            <button type="button" class="btn btn-filter" data-filter="Web">Web</button>
+            <button type="button" class="btn btn-filter" data-filter="UI/UX">UI/UX</button>
+            <button type="button" class="btn btn-filter" data-filter="Pendidikan">Pendidikan</button>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="search" id="cariProyek" class="form-control" placeholder="Cari proyek..." aria-label="Cari proyek">
+          </div>
+        </div>
+      </div>
+      <div class="row g-4" id="daftarProyek"></div>
+      <div id="pesanKosong" class="alert alert-info d-none mt-4" role="alert">Belum ada proyek yang cocok. Coba kategori atau kata kunci lain.</div>
+    </div>
+  </main>
+
+  <section class="bagian bagian-gelap">
+    <div class="container text-center">
+      <h2 class="judul-bagian text-white">Tertarik dengan salah satu proyek?</h2>
+      <p class="mx-auto">Ceritakan kebutuhan Anda, kita bisa diskusikan bersama.</p>
+      <button type="button" class="btn btn-kobalt btn-lg" data-bs-toggle="modal" data-bs-target="#modalKontak">Hubungi saya</button>
+    </div>
+  </section>
+
+  <!-- Modal kontak (komponen Bootstrap) -->
+  <div class="modal fade" id="modalKontak" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h4" id="judulModal">Hubungi saya</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <p>Pilih saluran yang paling nyaman bagi Anda.</p>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="mailto:emailkamu@gmail.com"><i class="bi bi-envelope me-2"></i> Email</a>
+            <a class="list-group-item list-group-item-action" href="https://wa.me/6281234567890" target="_blank" rel="noopener"><i class="bi bi-whatsapp me-2"></i> WhatsApp</a>
+            <a class="list-group-item list-group-item-action" href="https://github.com/" target="_blank" rel="noopener"><i class="bi bi-github me-2"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container d-md-flex justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <strong class="text-white">Bintang Rain Heriawan</strong><br>
+        Pendidikan Teknologi Informasi, Universitas Sulawesi Barat<br>
+        <a href="index.html">Beranda</a> &nbsp;·&nbsp; <a href="proyek.html">Proyek</a> &nbsp;·&nbsp; <a href="tentang.html">Tentang</a> &nbsp;·&nbsp; <a href="masuk.html">Masuk</a>
+      </div>
+      <div>
+        <a class="ikon-sosial" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a class="ikon-sosial" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a class="ikon-sosial" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a class="ikon-sosial" href="mailto:bintangrain36@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+    <div class="container mt-3 small">&copy; <span id="tahun"></span> Bintang Rain Heriawan. Dibuat sebagai tugas UTS.</div>
+  </footer>
+
+  <!-- BOOTSTRAP 5.3.3 (JavaScript) : wajib di atas skrip sendiri -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detail Proyek | Bintang Rain</title>
+
+  <!-- BOOTSTRAP 5.3.3 (CSS + ikon) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- CSS buatan sendiri (harus setelah Bootstrap) -->
+  <link href="css/style.css" rel="stylesheet">
+  <!-- Pengaman halaman: harus dimuat di <head> agar berjalan sebelum isi tampil -->
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Bintang Rain<span class="titik">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama" aria-controls="menuUtama" aria-expanded="false" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuUtama">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link active" href="proyek.html" aria-current="page">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-kobalt btn-sm px-3" id="tombolNav" href="masuk.html">Masuk</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="bagian">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+          <li class="breadcrumb-item"><a href="proyek.html">Proyek</a></li>
+          <li class="breadcrumb-item active" aria-current="page" id="navJudul">Detail</li>
+        </ol>
+      </nav>
+
+      <div id="galatDetail" class="alert alert-warning d-none" role="alert">
+        Proyek tidak ditemukan. <a href="proyek.html" class="alert-link">Kembali ke daftar proyek</a>.
+      </div>
+
+      <div id="isiDetail" class="row g-5">
+        <div class="col-lg-7">
+          <img id="gambar" src="" alt="" class="img-fluid rounded-3 border border-2 border-dark mb-4">
+          <h1 id="judul" class="judul-bagian"></h1>
+          <p id="ringkas" class="fs-5 text-secondary"></p>
+
+          <h2 class="h4 mt-4">Latar belakang</h2>
+          <p id="latar"></p>
+          <h2 class="h4 mt-4">Fitur utama</h2>
+          <ul id="fitur"></ul>
+          <h2 class="h4 mt-4">Proses pengerjaan</h2>
+          <ol id="proses"></ol>
+          <h2 class="h4 mt-4">Hasil</h2>
+          <p id="hasil"></p>
+
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <button type="button" class="btn btn-kobalt" data-bs-toggle="modal" data-bs-target="#modalKontak"><i class="bi bi-chat-dots me-1"></i> Tanya tentang proyek ini</button>
+            <button type="button" class="btn btn-garis" id="salinTautan"><i class="bi bi-link-45deg me-1"></i> Salin tautan</button>
+            <a href="proyek.html" class="btn btn-garis"><i class="bi bi-arrow-left me-1"></i> Daftar proyek</a>
+          </div>
+        </div>
+
+        <aside class="col-lg-5">
+          <div class="card border-2 border-dark rounded-3">
+            <div class="card-body">
+              <h2 class="h5">Ringkasan</h2>
+              <dl class="mb-3">
+                <dt>Kategori</dt><dd id="kategori"></dd>
+                <dt>Tahun</dt><dd id="tahunProyek"></dd>
+                <dt>Peran</dt><dd id="peran"></dd>
+              </dl>
+              <h3 class="h6">Teknologi</h3>
+              <div id="teknologi"></div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <a id="sebelum" href="#" class="btn btn-sm btn-outline-dark d-none"><i class="bi bi-chevron-left"></i> Sebelumnya</a>
+            <a id="sesudah" href="#" class="btn btn-sm btn-outline-dark d-none ms-auto">Berikutnya <i class="bi bi-chevron-right"></i></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal kontak (komponen Bootstrap) -->
+  <div class="modal fade" id="modalKontak" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h4" id="judulModal">Hubungi saya</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <p>Pilih saluran yang paling nyaman bagi Anda.</p>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="mailto:emailkamu@gmail.com"><i class="bi bi-envelope me-2"></i> Email</a>
+            <a class="list-group-item list-group-item-action" href="https://wa.me/6285179840689" target="_blank" rel="noopener"><i class="bi bi-whatsapp me-2"></i> WhatsApp</a>
+            <a class="list-group-item list-group-item-action" href="https://github.com/" target="_blank" rel="noopener"><i class="bi bi-github me-2"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container d-md-flex justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <strong class="text-white">Bintang Rain Heriawan</strong><br>
+        Pendidikan Teknologi Informasi, Universitas Sulawesi Barat<br>
+        <a href="index.html">Beranda</a> &nbsp;·&nbsp; <a href="proyek.html">Proyek</a> &nbsp;·&nbsp; <a href="tentang.html">Tentang</a> &nbsp;·&nbsp; <a href="masuk.html">Masuk</a>
+      </div>
+      <div>
+        <a class="ikon-sosial" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a class="ikon-sosial" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a class="ikon-sosial" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a class="ikon-sosial" href="mailto:bintangrain36@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+    <div class="container mt-3 small">&copy; <span id="tahun"></span> Bintang Rain Heriawan. Dibuat sebagai tugas UTS.</div>
+  </footer>
+
+  <!-- BOOTSTRAP 5.3.3 (JavaScript) : wajib di atas skrip sendiri -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tentang | Bintang Rain</title>
+
+  <!-- BOOTSTRAP 5.3.3 (CSS + ikon) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- CSS buatan sendiri (harus setelah Bootstrap) -->
+  <link href="css/style.css" rel="stylesheet">
+  <!-- Pengaman halaman: harus dimuat di <head> agar berjalan sebelum isi tampil -->
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Bintang Rain<span class="titik">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama" aria-controls="menuUtama" aria-expanded="false" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuUtama">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="proyek.html">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link active" href="tentang.html" aria-current="page">Tentang</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-kobalt btn-sm px-3" id="tombolNav" href="masuk.html">Masuk</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="bagian">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-md-4 text-center text-md-start">
+          <img id="fotoProfil" src="image/bintang.jpeg" class="foto-profil">
+        </div>
+        <div class="col-md-8">
+          <h1 class="judul-bagian">Tentang saya</h1>
+          <p class="fs-5">Saya Bintang Rain Heriawan, mahasiswa Prodi Pendidikan Teknologi Informasi, Fakultas Keguruan dan Ilmu Pendidikan, Universitas Sulawesi Barat.</p>
+          <p>Saya tertarik pada pertemuan antara teknologi dan pendidikan: bagaimana sebuah antarmuka, media, atau aplikasi dapat membuat proses belajar lebih mudah dipahami. Website ini adalah tempat saya mendokumentasikan proses tersebut.</p>
+          <a href="proyek.html" class="btn btn-kobalt">Lihat proyek</a>
+          <button type="button" class="btn btn-garis ms-1" data-bs-toggle="modal" data-bs-target="#modalKontak">Hubungi saya</button>
+        </div>
+      </div>
+
+      <div class="row g-5 mt-2">
+        <div class="col-lg-6">
+          <h2 class="h3 mb-3">Data singkat</h2>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Nama</strong> Bintang Rain Heriawan</li>
+            <li class="list-group-item"><strong>Kampus</strong> Universitas Sulawesi Barat</li>
+            <li class="list-group-item"><strong>Prodi</strong> Pendidikan Teknologi Informasi</li>
+            <li class="list-group-item"><strong>Fokus</strong> Web, UI/UX, media pembelajaran</li>
+            <li class="list-group-item"><strong>Email</strong> <a href="mailto:emailkamu@gmail.com">emailkamu@gmail.com</a></li>
+          </ul>
+
+          <h2 class="h3 mt-5 mb-4">Perjalanan belajar</h2>
+          <div class="garis-waktu">
+            <div class="butir"><strong>2025 sampai sekarang</strong><br>Mahasiswa Pendidikan Teknologi Informasi, Universitas Sulawesi Barat.</div>
+            <div class="butir"><strong>2026</strong><br>Mempelajari HTML, CSS, Bootstrap 5, dan JavaScript untuk membangun website statis.</div>
+            <div class="butir"><strong>2026</strong><br>Mempelajari interaksi manusia dan komputer, termasuk usability dan prototyping.</div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h2 class="h3 mb-4">Tingkat penguasaan</h2>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>HTML dan CSS</span><span>80%</span></div>
+            <div class="progress" role="progressbar" aria-label="HTML dan CSS" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: 80%"></div></div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>Bootstrap 5</span><span>70%</span></div>
+            <div class="progress" role="progressbar" aria-label="Bootstrap 5" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: 70%"></div></div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>JavaScript dasar</span><span>60%</span></div>
+            <div class="progress" role="progressbar" aria-label="JavaScript dasar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: 60%"></div></div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>Desain antarmuka</span><span>65%</span></div>
+            <div class="progress" role="progressbar" aria-label="Desain antarmuka" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: 65%"></div></div>
+          </div>
+
+          <h2 class="h3 mt-5 mb-3">Lebih jauh</h2>
+          <div class="accordion" id="akordeon">
+            <div class="accordion-item">
+              <h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">Apa yang sedang saya pelajari?</button></h3>
+              <div id="a1" class="accordion-collapse collapse show" data-bs-parent="#akordeon"><div class="accordion-body">Pengembangan web statis, validasi form dengan JavaScript, serta penerapan prinsip usability pada rancangan antarmuka.</div></div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">Apa tujuan saya ke depan?</button></h3>
+              <div id="a2" class="accordion-collapse collapse" data-bs-parent="#akordeon"><div class="accordion-body">Menjadi pendidik sekaligus pengembang media pembelajaran digital yang mudah diakses peserta didik.</div></div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">Bagaimana cara menghubungi saya?</button></h3>
+              <div id="a3" class="accordion-collapse collapse" data-bs-parent="#akordeon"><div class="accordion-body">Klik tombol <strong>Hubungi saya</strong> di halaman ini, atau kirim email ke <a href="mailto:emailkamu@gmail.com">emailkamu@gmail.com</a>.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal kontak (komponen Bootstrap) -->
+  <div class="modal fade" id="modalKontak" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h4" id="judulModal">Hubungi saya</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <p>Pilih saluran yang paling nyaman bagi Anda.</p>
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="mailto:emailkamu@gmail.com"><i class="bi bi-envelope me-2"></i> Email</a>
+            <a class="list-group-item list-group-item-action" href="https://wa.me/6281234567890" target="_blank" rel="noopener"><i class="bi bi-whatsapp me-2"></i> WhatsApp</a>
+            <a class="list-group-item list-group-item-action" href="https://github.com/" target="_blank" rel="noopener"><i class="bi bi-github me-2"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container d-md-flex justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <strong class="text-white">Bintang Rain Heriawan</strong><br>
+        Pendidikan Teknologi Informasi, Universitas Sulawesi Barat<br>
+        <a href="index.html">Beranda</a> &nbsp;·&nbsp; <a href="proyek.html">Proyek</a> &nbsp;·&nbsp; <a href="tentang.html">Tentang</a> &nbsp;·&nbsp; <a href="masuk.html">Masuk</a>
+      </div>
+      <div>
+        <a class="ikon-sosial" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a class="ikon-sosial" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a class="ikon-sosial" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a class="ikon-sosial" href="mailto:emailkamu@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+    <div class="container mt-3 small">&copy; <span id="tahun"></span> Bintang Rain Heriawan. Dibuat sebagai tugas UTS.</div>
+  </footer>
+
+  <!-- BOOTSTRAP 5.3.3 (JavaScript) : wajib di atas skrip sendiri -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masuk | Bintang Rain</title>
+
+  <!-- BOOTSTRAP 5.3.3 (CSS + ikon) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- CSS buatan sendiri (harus setelah Bootstrap) -->
+  <link href="css/style.css" rel="stylesheet">
+  <script src="js/auth.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Bintang Rain<span class="titik">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama" aria-controls="menuUtama" aria-expanded="false" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuUtama">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="proyek.html">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link" href="tentang.html">Tentang</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-kobalt btn-sm px-3" id="tombolNav" href="masuk.html">Masuk</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Form login: satu-satunya jalan untuk membuka portofolio -->
+    <div class="kartu-login" id="kartuLogin">
+      <h1 class="h2 mb-1">Masuk</h1>
+      <p class="text-secondary">Masukkan Gmail dan password untuk membuka portofolio.</p>
+
+      <div id="areaAlert" aria-live="polite"></div>
+
+      <form id="formLogin" novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Gmail</label>
+          <input type="email" class="form-control" id="email" placeholder="nama@gmail.com" autocomplete="email">
+          <div class="invalid-feedback" id="emailPesan"></div>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <div class="input-group has-validation">
+            <input type="password" class="form-control" id="password" placeholder="Minimal 8 karakter" autocomplete="current-password">
+            <button class="btn btn-outline-dark" type="button" id="lihatPassword" aria-label="Tampilkan password"><i class="bi bi-eye"></i></button>
+            <div class="invalid-feedback" id="passwordPesan"></div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-kobalt w-100 btn-lg">Masuk</button>
+      </form>
+      <p class="small text-secondary mt-3 mb-0">Gunakan alamat yang berakhiran @gmail.com. Password minimal 8 karakter dan mengandung huruf dan angka. Validasi dilakukan di browser.</p>
+    </div>
+
+    <!-- Tampil jika pengguna sudah login lalu membuka halaman ini lagi -->
+    <div class="kartu-login d-none" id="kartuSudahMasuk">
+      <h1 class="h2 mb-1">Anda sudah masuk</h1>
+      <p class="text-secondary">Masuk sebagai <strong id="emailAktif"></strong>.</p>
+      <div class="d-grid gap-2">
+        <a href="index.html" class="btn btn-kobalt btn-lg">Buka beranda</a>
+        <button type="button" class="btn btn-garis" id="tombolKeluar"><i class="bi bi-box-arrow-right me-1"></i> Keluar</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container d-md-flex justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <strong class="text-white">Bintang Rain Heriawan</strong><br>
+        Pendidikan Teknologi Informasi, Universitas Sulawesi Barat<br>
+        <a href="index.html">Beranda</a> &nbsp;·&nbsp; <a href="proyek.html">Proyek</a> &nbsp;·&nbsp; <a href="tentang.html">Tentang</a> &nbsp;·&nbsp; <a href="masuk.html">Masuk</a>
+      </div>
+      <div>
+        <a class="ikon-sosial" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a class="ikon-sosial" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a class="ikon-sosial" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a class="ikon-sosial" href="mailto:emailkamu@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+    <div class="container mt-3 small">&copy; <span id="tahun"></span> Bintang Rain Heriawan. Dibuat sebagai tugas UTS.</div>
+  </footer>
+
+  <!-- BOOTSTRAP 5.3.3 (JavaScript) : wajib di atas skrip sendiri -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/masuk.js"></script>
+</body>
+
+</html>
